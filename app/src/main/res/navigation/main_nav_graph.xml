@@ -18,7 +18,7 @@
         android:id="@+id/donationFragment"
         android:name="com.example.tamboon.donation.DonationFragment"
         android:label="donation_fragment"
-        tools:layout="@layout/donation_fragment" >
+        tools:layout="@layout/fragment_donation" >
         <action
             android:id="@+id/action_donationFragment_to_successFragment"
             app:destination="@id/successFragment" />

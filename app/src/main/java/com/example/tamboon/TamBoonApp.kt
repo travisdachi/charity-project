@@ -2,6 +2,7 @@ package com.example.tamboon
 
 import android.app.Application
 import com.example.tamboon.charity_list.CharityListViewModel
+import com.example.tamboon.donation.DonationViewModel
 import com.example.tamboon.shared.TamBoonApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -34,4 +35,5 @@ val appModule = module {
     }
     single { get<Retrofit>().create(TamBoonApi::class.java) }
     viewModel { CharityListViewModel(get()) }
+    viewModel { DonationViewModel(get()) }
 }

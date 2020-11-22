@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tamboon.R
 import com.example.tamboon.databinding.FragmentCharityListBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CharityListFragment : Fragment() {
     private val charityListViewModel: CharityListViewModel by sharedViewModel()
     private lateinit var binding: FragmentCharityListBinding
-    private val charityAdapter = CharityAdapter()
+    private val charityAdapter = CharityAdapter {
+        findNavController().navigate(R.id.action_charityListFragment_to_donationFragment)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

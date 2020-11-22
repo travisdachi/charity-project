@@ -16,7 +16,7 @@ class CharityListViewModel(val api: TamBoonApi) : ViewModel() {
     fun getCharities() {
         viewModelScope.launch {
             val response = api.getCharities()
-            if (response.code() == 200) {
+            if (response.isSuccessful) {
                 val body = response.body()
                 when {
                     body == null -> _charityListState.value =

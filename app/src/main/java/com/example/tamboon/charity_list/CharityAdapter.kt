@@ -7,7 +7,9 @@ import com.bumptech.glide.Glide
 import com.example.tamboon.databinding.ItemCharityBinding
 import com.example.tamboon.shared.Charity
 
-class CharityAdapter : RecyclerView.Adapter<CharityViewHolder>() {
+class CharityAdapter(
+    private val onClickListener: ((Charity) -> Unit)? = null
+) : RecyclerView.Adapter<CharityViewHolder>() {
     var charities: List<Charity> = emptyList()
         set(value) {
             field = value
@@ -26,6 +28,7 @@ class CharityAdapter : RecyclerView.Adapter<CharityViewHolder>() {
             .load(charity.logo_url)
             .into(holder.binding.imageView)
         holder.binding.textView.text = charity.name
+        holder.binding.root.setOnClickListener { onClickListener?.invoke(charity) }
     }
 }
 
