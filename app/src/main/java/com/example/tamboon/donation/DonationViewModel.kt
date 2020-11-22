@@ -3,6 +3,7 @@ package com.example.tamboon.donation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.tamboon.shared.DonationRequest
 import com.example.tamboon.shared.TamBoonApi
 import org.joda.time.DateTime
 
@@ -11,7 +12,7 @@ class DonationViewModel(private val api: TamBoonApi) : ViewModel() {
     val state: LiveData<DonationState> = _state
     suspend fun submitDonation(name: String, amount: Int): DonationResult {
         _state.value = _state.value!!.copy(isLoading = true)
-        val response = api.postDonation(com.example.tamboon.shared.DonationRequest(name, "token_test_deadbeef", amount))
+        val response = api.postDonation(DonationRequest(name, "token_test_deadbeef", amount))
         _state.value = _state.value!!.copy(isLoading = false)
         return if (response.isSuccessful) {
             val body = response.body()

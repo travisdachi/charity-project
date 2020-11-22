@@ -50,7 +50,7 @@ class CharityListFragment : Fragment() {
                     binding.errorContainer.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
                 }
-                is CharityListState.Error -> {
+                is CharityListState.Failure -> {
                     binding.progressBar.visibility = View.GONE
                     binding.emptyTextView.visibility = View.GONE
                     binding.errorContainer.visibility = View.VISIBLE

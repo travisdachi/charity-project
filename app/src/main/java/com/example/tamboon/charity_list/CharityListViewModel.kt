@@ -22,15 +22,15 @@ class CharityListViewModel(private val api: TamBoonApi) : ViewModel() {
                     val body = response.body()
                     when {
                         body == null -> _charityListState.value =
-                            CharityListState.Error("Something went wrong")
+                            CharityListState.Failure("Something went wrong")
                         body.data.isEmpty() -> _charityListState.value = CharityListState.Empty
                         else -> _charityListState.value = CharityListState.Success(body.data)
                     }
                 } else {
-                    _charityListState.value = CharityListState.Error(response.message())
+                    _charityListState.value = CharityListState.Failure(response.message())
                 }
             } catch (e: Throwable) {
-                _charityListState.value = CharityListState.Error(e.message)
+                _charityListState.value = CharityListState.Failure(e.message)
             }
         }
     }
@@ -39,6 +39,6 @@ class CharityListViewModel(private val api: TamBoonApi) : ViewModel() {
 sealed class CharityListState {
     object Loading : CharityListState()
     object Empty : CharityListState()
-    data class Error(val message: String?) : CharityListState()
+    data class Failure(val message: String?) : CharityListState()
     data class Success(val list: List<Charity>) : CharityListState()
 }
