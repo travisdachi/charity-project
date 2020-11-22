@@ -66,7 +66,7 @@ class CharityListFragment : Fragment() {
                 }
             }
         })
-//        charityListViewModel.getCharities()
+        charityListViewModel.getCharities()
     }
 
 }
