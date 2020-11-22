@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.tamboon.databinding.FragmentCharityListBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CharityListFragment : Fragment() {
     private val charityListViewModel: CharityListViewModel by sharedViewModel()
     private lateinit var binding: FragmentCharityListBinding
-    private lateinit var adapter: RecyclerView.Adapter<*>
+    private val charityAdapter = CharityAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +22,7 @@ class CharityListFragment : Fragment() {
         binding = FragmentCharityListBinding.inflate(layoutInflater, container, false)
         binding.recyclerView.run {
             layoutManager = LinearLayoutManager(context)
+            adapter = charityAdapter
         }
         return binding.root
     }
@@ -55,7 +55,7 @@ class CharityListFragment : Fragment() {
                     binding.emptyTextView.visibility = View.GONE
                     binding.errorTextView.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
-//                    adapter
+                    charityAdapter.charities = state.list
                 }
             }
         })
