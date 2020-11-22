@@ -28,6 +28,9 @@ class CharityListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = charityAdapter
         }
+        binding.errorContainer.setOnClickListener {
+            charityListViewModel.getCharities()
+        }
         return binding.root
     }
 
@@ -38,32 +41,32 @@ class CharityListFragment : Fragment() {
                 CharityListState.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.emptyTextView.visibility = View.GONE
-                    binding.errorTextView.visibility = View.GONE
+                    binding.errorContainer.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
                 }
                 CharityListState.Empty -> {
                     binding.progressBar.visibility = View.GONE
                     binding.emptyTextView.visibility = View.VISIBLE
-                    binding.errorTextView.visibility = View.GONE
+                    binding.errorContainer.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
                 }
                 is CharityListState.Error -> {
                     binding.progressBar.visibility = View.GONE
                     binding.emptyTextView.visibility = View.GONE
-                    binding.errorTextView.visibility = View.VISIBLE
+                    binding.errorContainer.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
                     binding.errorTextView.text = state.message
                 }
                 is CharityListState.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.emptyTextView.visibility = View.GONE
-                    binding.errorTextView.visibility = View.GONE
+                    binding.errorContainer.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
                     charityAdapter.charities = state.list
                 }
             }
         })
-        charityListViewModel.getCharities()
+//        charityListViewModel.getCharities()
     }
 
 }
