@@ -28,7 +28,14 @@ class DonationFragment : Fragment() {
         binding.run {
             submitButton.setOnClickListener {
                 lifecycleScope.launch {
-                    val result = viewModel.submitDonation(binding.nameEditText.text.toString(), binding.amountEditText.text.toString().toInt())
+                    val result = viewModel.submitDonation(
+                        nameEditText.text.toString(),
+                        amountEditText.text.toString().toInt(),
+                        creditCardEditText.text.toString(),
+                        expireEditText.expiryMonth,
+                        expireEditText.expiryYear,
+                        cvvEditText.securityCode
+                    )
                     when (result) {
                         DonationResult.Success -> findNavController().navigate(R.id.action_donationFragment_to_successFragment)
                         is DonationResult.Failure -> Snackbar.make(requireView(), result.message, Snackbar.LENGTH_SHORT).show()

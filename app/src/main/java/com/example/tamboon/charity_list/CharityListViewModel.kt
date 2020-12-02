@@ -23,8 +23,8 @@ class CharityListViewModel(private val api: TamBoonApi) : ViewModel() {
                     when {
                         body == null -> _charityListState.value =
                             CharityListState.Failure("Something went wrong")
-                        body.data.isEmpty() -> _charityListState.value = CharityListState.Empty
-                        else -> _charityListState.value = CharityListState.Success(body.data)
+                        body.isEmpty() -> _charityListState.value = CharityListState.Empty
+                        else -> _charityListState.value = CharityListState.Success(body)
                     }
                 } else {
                     _charityListState.value = CharityListState.Failure(response.message())
